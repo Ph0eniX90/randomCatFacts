@@ -4,7 +4,7 @@
 
 Это не шутка...
 
-Подробная статья:  https://mirror.xyz/dashboard/edit/2kakqj1HstGJhMo2yuFMkV4TtBK4upGxWKDS8PVj1TA
+Подробная статья:  [https://mirror.xyz/dashboard/edit/2kakqj1HstGJhMo2yuFMkV4TtBK4upGxWKDS8PVj1TA](https://teletype.in/@bitfuture/WRKYjXHVO78)
 
 
 ТГ канал:   https://t.me/NewBitFuture
