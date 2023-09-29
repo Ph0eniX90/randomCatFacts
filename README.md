@@ -10,4 +10,4 @@
 ТГ канал:   https://t.me/NewBitFuture
 
 
-Youtube с видео-гайдом:  https://youtu.be/UyMmVqOvWkk
+Youtube с видео-гайдом:  https://youtu.be/7_vshCjhLi0
