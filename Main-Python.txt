@@ -1,0 +1,57 @@
+import requests
+import base64
+import random
+
+# Insert your GitHub tokens and names here
+git_tokens = ['Token-1', 'Token-2']
+git_names = ['name-1', 'name-2']
+
+# Function to generate unique name for the file
+def generate_unique_name():
+    return f"fact_{random.randint(0, 150000000)}.txt"
+
+# Function to push random cat name to the GitHub repo
+def push_random_cat_name(repo_owner, token):
+    try:
+        # Get all files from the repo
+        branch_files_data = requests.get(f"https://api.github.com/repos/{repo_owner}/randomCatFacts/contents/",
+                                         headers={'Authorization': f'token {token}'})
+        branch_files_data.raise_for_status()
+        
+        # Get random cat fact
+        fact = requests.get("https://catfact.ninja/fact").json()['fact']
+        
+        # Generate unique name for the file
+        random_name = generate_unique_name()
+        
+        # Check if file name is unique in the repo
+        is_already_file_name_exist = any(file['path'] == random_name for file in branch_files_data.json())
+        
+        # If file name is not unique, generate new name
+        if is_already_file_name_exist:
+            push_random_cat_name(repo_owner, token)
+            return
+        
+        # Push file to the repo
+        file_content = base64.b64encode(fact.encode('utf-8')).decode('utf-8')
+        file_push_data = {
+            "message": "Another great day with great cat fact",
+            "content": file_content,
+            "branch": "main"
+        }
+        response = requests.put(f"https://api.github.com/repos/{repo_owner}/randomCatFacts/contents/{random_name}",
+                                headers={'Authorization': f'token {token}'},
+                                json=file_push_data)
+        response.raise_for_status()
+        
+        print('Pushed fact to randomCatFacts')
+    except Exception as error:
+        print('Error pushing fact to randomCatFacts', error)
+
+# Function to start execution
+def start_execution():
+    for token, name in zip(git_tokens, git_names):
+        push_random_cat_name(name, token)
+
+# Start execution
+start_execution()
